@@ -11,5 +11,8 @@ class PagesController < ApplicationController
   def myaccount
   end
   
+  def myitems
+  end
+  
 
 end

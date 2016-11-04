@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get 'pages/signedUp'
   
   get 'pages/myaccount'
+  
+  get 'pages/myitems'
 
   resources :users
   resources :ratings

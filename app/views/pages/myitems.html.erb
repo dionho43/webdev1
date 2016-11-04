@@ -1,0 +1,45 @@
+<div class="jumbotron">
+  <div class="container">
+
+
+
+
+
+  <% if !signed_in? %>
+		<h1>Welcome</h1>
+		<h4>You need to be logged in to view your account<h4>
+			<li><%=link_to "Register", new_user_path %></li>
+			<li><%=link_to "Sign In", login_path %></li>
+			
+		<% else %>
+			<h1>     Items listed by user : <%= @current_user.username %></h1>
+				<p>
+					<strong>Title:</strong>
+					<strong>Image:</strong>
+					<strong>Price:</strong>
+					<strong>Location:</strong>
+				</p>
+				
+					
+				<p>
+					<% @current_user.items.each do |anything| %> 
+					<%= anything.title %>
+					<%= image_tag(anything.image, :size => "100x50") %>
+					<%= euro(anything.price) %>
+					<%= anything.location %>
+		
+					<br \>
+					<% end %>
+				</p>
+					
+				</tbody>
+
+			</table>
+			<li><%=link_to "View my items", pages_myitems_path%></li>
+            <li><%=link_to "Edit Account", edit_user_path(@current_user)%></li>
+		<%end%>
+
+<br>
+
+  </div>
+</div>
