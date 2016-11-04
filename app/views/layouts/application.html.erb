@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>myBay</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="banner">
+	<%= image_tag("sadFace.jpg", :size => "100x50") %>
+	<%= "Movies We Love" %>
+</div>
+
+<div id = "nav">
+	<ul>
+		<li><%=link_to "Home", root_path%></li>
+		<li><%=link_to "Categories", categories_path%></li>
+		<li><%=link_to "List an item", new_item_path%></li>
+		<li><%=link_to "Leave a rating", ratings_path%></li>
+
+		
+		<% if !signed_in? %>
+			<li><%=link_to "Register", new_user_path %></li>
+			<li><%=link_to "Sign In", login_path %></li>
+		<% else %>
+			<li>Signed in as <%= @current_user.username %></li>
+			<li><%= link_to "Sign Out", logout_path %></li>
+		<%end%>
+		
+		<li><%=mail_to "dionho43@hotmail.com", 'Contact Us'%></li>
+	</ul>
+</div>
+		
+		
+<%= yield %>
+
+</body>
+</html>

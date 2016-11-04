@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @category.name %>
+</p>
+
+<p>
+	There's <%= pluralize(@category.items.size, 'item') %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <strong>Image:</strong>
+  <strong>Price:</strong>
+  <strong>Location:</strong>
+  <strong>Latest Rating:</strong>
+</p>
+
+<p>
+	<% @category.items.each do |anything| %> 
+		<%= anything.title %>
+		<%= image_tag(anything.image, :size => "100x50") %>
+		<%= euro(anything.price) %>
+		<%= anything.location %>
+		<%= anything.ratings.last.score %>
+		
+		<br \>
+	<% end %>
+</p>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>
