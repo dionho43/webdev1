@@ -11,10 +11,11 @@ Rails.application.routes.draw do
 	get 'logout' => :destroy
 	delete 'logout' => :destroy
   end
-  
-  get 'pages/home'
 
-  get 'pages/about'
+  
+  get 'pages/signedUp'
+  
+  get 'pages/myaccount'
 
   resources :users
   resources :ratings
