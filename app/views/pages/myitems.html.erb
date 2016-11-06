@@ -27,6 +27,9 @@
 					<%= image_tag(anything.image, :size => "100x50") %>
 					<%= euro(anything.price) %>
 					<%= anything.location %>
+					<%= anything.ratings.last.score %>
+					<%= link_to 'Edit', edit_item_path(anything) %>
+					<%= link_to 'Destroy', anything, method: :delete, data: { confirm: 'Are you sure?' } %>
 		
 					<br \>
 					<% end %>
