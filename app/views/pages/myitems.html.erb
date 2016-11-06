@@ -1,10 +1,16 @@
-<div class="jumbotron">
-  <div class="container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 
-
-
-
-
+<div class="container">
   <% if !signed_in? %>
 		<h1>Welcome</h1>
 		<h4>You need to be logged in to view your account<h4>
@@ -12,37 +18,35 @@
 			<li><%=link_to "Sign In", login_path %></li>
 			
 		<% else %>
-			<h1>     Items listed by user : <%= @current_user.username %></h1>
-				<p>
-					<strong>Title:</strong>
-					<strong>Image:</strong>
-					<strong>Price:</strong>
-					<strong>Location:</strong>
-				</p>
-				
-					
-				<p>
-					<% @current_user.items.each do |anything| %> 
-					<%= anything.title %>
-					<%= image_tag(anything.image, :size => "100x50") %>
-					<%= euro(anything.price) %>
-					<%= anything.location %>
-					<%= anything.ratings.last.score %>
-					<%= link_to 'Edit', edit_item_path(anything) %>
-					<%= link_to 'Destroy', anything, method: :delete, data: { confirm: 'Are you sure?' } %>
-		
-					<br \>
-					<% end %>
-				</p>
-					
-				</tbody>
-
-			</table>
-			<li><%=link_to "View my items", pages_myitems_path%></li>
-            <li><%=link_to "Edit Account", edit_user_path(@current_user)%></li>
-		<%end%>
-
-<br>
-
-  </div>
+	<h2>     Items listed by user : <%= @current_user.username %></h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+		<th>Image</th>
+		<th>Price</th>
+		<th>Location</th>
+		<th>Age</th>
+      </tr>
+    </thead>
+    <tbody>
+     <% @current_user.items.each do |anything| %>
+      <tr>
+        <td><%= anything.title  %></td>
+        <td><%= image_tag(anything.image, :size => "100x50") %></td>
+        <td><%= euro(anything.price) %></td>
+        <td><%= anything.location %></td>
+		<td><%= ((Time.now - anything.created_at) / 24.hours).to_i %> Days ago</td>
+		<td><%= link_to 'Edit', edit_item_path(anything) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  
+	<li><%=link_to "View my items", pages_myitems_path%></li>
+    <li><%=link_to "Edit Account", edit_user_path(@current_user)%></li>
+	<% end %>
 </div>
+
+</body>
+</html>

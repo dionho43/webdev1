@@ -1,33 +1,43 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 
-<p>
-  <strong>Category:</strong>
-  <%= @category.name %>
-</p>
-
-<p>
-	There's <%= pluralize(@category.items.size, 'item') %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <strong>Image:</strong>
-  <strong>Price:</strong>
-  <strong>Location:</strong>
-  <strong>Latest Rating:</strong>
-</p>
-
-<p>
-	<% @category.items.each do |anything| %> 
-		<%= anything.title %>
-		<%= image_tag(anything.image, :size => "100x50") %>
-		<%= euro(anything.price) %>
-		<%= anything.location %>
-
-		
-		<br \>
-	<% end %>
-</p>
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
+<div class="container">
+  <h3><%= @category.name %></h3></br>
+  	There's <%= pluralize(@category.items.size, 'item') %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+		<th>Image</th>
+		<th>Price</th>
+		<th>Location</th>
+		<th>Age</th>
+      </tr>
+    </thead>
+    <tbody>
+     <% @category.items.each do |anything| %>
+      <tr>
+        <td><%= anything.title  %></td>
+        <td><%= image_tag(anything.image, :size => "100x50") %></td>
+        <td><%= euro(anything.price) %></td>
+        <td><%= anything.location %></td>
+		<td><%= ((Time.now - anything.created_at) / 24.hours).to_i %> Days ago</td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  
 <%= link_to 'Back', categories_path %>
+</div>
+
+</body>
+</html>
