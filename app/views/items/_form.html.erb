@@ -15,25 +15,15 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
-  <div class="field">
-    <%= f.label :image %><br>
-    <%= f.text_field :image %>
-  </div>
+  <%= f.label :Image %>
+	<%= f.file_field :attachment %>
   <div class="field">
     <%= f.label :price %><br>
     <%= f.text_field :price %>
   </div>
   <div class="field">
-    <%= f.label :location %><br>
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
     <%= f.label :category_id %><br>
     <%= f.collection_select :category_id, Category.all, :id, :name %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-  <%= f.collection_select :user_id, User.all, :id, :username %>
   </div>
   <div class="actions">
     <%= f.submit %>

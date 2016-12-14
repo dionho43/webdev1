@@ -11,6 +11,30 @@ Rails.application.routes.draw do
 	get 'logout' => :destroy
 	delete 'logout' => :destroy
   end
+  
+  resources :items do
+  put :purchase
+  end
+  
+  resources :items do
+  put :rate1
+  end
+  
+  resources :items do
+  put :rate2
+  end
+  
+  resources :items do
+  put :rate3
+  end
+  
+  resources :items do
+  put :rate4
+  end
+  
+  resources :items do
+  put :rate5
+  end
 
   
   get 'pages/signedUp'
@@ -18,6 +42,24 @@ Rails.application.routes.draw do
   get 'pages/myaccount'
   
   get 'pages/myitems'
+  
+  get 'pages/mypurchases'
+  
+  get 'pages/solditems'
+  
+  get 'search',	:to=>'items#search'
+  
+  get 'purchase', :to=>'items#purchase'
+  
+  get 'rate1', :to=>'ratings#rate1'
+  
+  get 'rate2', :to=>'ratings#rate2'
+  
+  get 'rate3', :to=>'ratings#rate3'
+  
+  get 'rate4', :to=>'ratings#rate4'
+  
+  get 'rate5', :to=>'ratings#rate5'
 
   resources :users
   resources :ratings

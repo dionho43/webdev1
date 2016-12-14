@@ -6,4 +6,7 @@ class User < ActiveRecord::Base
 	
 	validates :password_digest, presence: true #Not null	
 	validates :email, presence: true
+	
+	geocoded_by :address
+	after_validation :geocode, :if => :address_changed?
 end

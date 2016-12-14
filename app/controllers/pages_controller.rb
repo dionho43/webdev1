@@ -14,5 +14,12 @@ class PagesController < ApplicationController
   def myitems
   end
   
+  def mypurchases
+  end
+  
+  def solditems
+  end
+
+  
 
 end

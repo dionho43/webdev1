@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <% if !signed_in? %>
+		<h1>Welcome</h1>
+		<h4>You need to be logged in to view your purchases<h4>
+			<li><%=link_to "Register", new_user_path %></li>
+			<li><%=link_to "Sign In", login_path %></li>
+			
+		<% else %>
+	<h2>     Purchases made by user : <%= @current_user.username %></h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+		<th>Image</th>
+		<th>Price</th>
+		<th>Location</th>
+		<th>Time Left</th>
+		<th>Rating</th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+      </tr>
+    </thead>
+    <tbody>
+     <% Item.all.each do |anything| %>
+	 <% if anything.buyer == @current_user.username %>
+      <tr>
+        <td><%= anything.title  %></td>
+        <td><%= image_tag(anything.attachment, :size => "100x50") %></td>
+        <td><%= euro(anything.price) %></td>
+        <td><%= anything.location %></td>
+		<% if anything.sold == true %>
+		<td> Sold : <%= anything.buyer %></td>
+		<% else %>
+		<td><%= (30 - (Time.now - anything.created_at) / 24.hours).to_i %> Days</td>
+		<% end %>
+		<% unless anything.ratings.any? %>
+		<td>Leave a Rating</td>
+		<td><%= link_to '1', item_rate1_path(anything.id), method: :put %></td>
+		<td><%= link_to '2', item_rate2_path(anything.id), method: :put %></td>
+		<td><%= link_to '3', item_rate3_path(anything.id), method: :put %></td>
+		<td><%= link_to '4', item_rate4_path(anything.id), method: :put %></td>
+		<td><%= link_to '5', item_rate5_path(anything.id), method: :put %></td>
+		<% end %>
+		<% if anything.ratings.any? %>
+		<td>You Rated this Item : </td>
+		<td><%= anything.ratings.first.score %></td>
+		<% end %>
+		
+
+      </tr>
+	  <% end %>
+    <% end %>
+    </tbody>
+  </table>
+	<li><%= link_to 'Back', pages_myaccount_path %></li>
+	<% end %>
+</div>
+
+</body>
+</html>

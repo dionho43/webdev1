@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <% if !signed_in? %>
+		<h1>Welcome</h1>
+		<h4>You need to be logged in to view your items<h4>
+			<li><%=link_to "Register", new_user_path %></li>
+			<li><%=link_to "Sign In", login_path %></li>
+			
+		<% else %>
+	<h2>     Items listed by user : <%= @current_user.username %></h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+		<th>Image</th>
+		<th>Price</th>
+		<th>Location</th>
+		<th>Buyer</th>
+		<th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+     <% @current_user.items.each do |anything| %>
+	 <% if anything.sold == true %>
+      <tr>
+        <td><%= anything.title  %></td>
+        <td><%= image_tag(anything.attachment, :size => "100x50") %></td>
+        <td><%= euro(anything.price) %></td>
+        <td><%= anything.location %></td>
+		<td><%= anything.buyer %></td>
+		<% unless !anything.ratings.any? %>
+		<td><%= anything.ratings.first.score %></td>
+		<% end %>
+
+		<% if admin? %>
+		<td><%= link_to 'Edit', edit_item_path(anything) %></td>
+		<% end %>
+      </tr>
+    <% end %>
+	<% end %>
+    </tbody>
+  </table>
+  
+
+	<li><%= link_to 'Back', pages_myaccount_path %></li>
+	<% end %>
+</div>
+
+</body>
+</html>

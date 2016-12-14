@@ -21,6 +21,10 @@ class RatingsController < ApplicationController
   # GET /ratings/1/edit
   def edit
   end
+  
+
+	
+
 
   # POST /ratings
   # POST /ratings.json

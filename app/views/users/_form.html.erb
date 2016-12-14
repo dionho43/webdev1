@@ -10,11 +10,16 @@
       </ul>
     </div>
   <% end %>
-
+<% if admin? %>
   <div class="field">
     <%= f.label :username %><br>
     <%= f.text_field :username %>
   </div>
+    <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+ <% end %>
   <div class="field">
     <%= f.label :address %><br>
     <%= f.text_field :address %>
@@ -23,10 +28,7 @@
     <%= f.label :phoneNumber %><br>
     <%= f.text_field :phoneNumber %>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
+
   <div class="field">
     <%= f.label :password %><br>
     <%= f.text_field :password %>

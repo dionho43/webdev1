@@ -1,34 +1,49 @@
+
+<!DOCTYPE html>
 <p id="notice"><%= notice %></p>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
 
-<p>
-  <strong>Title:</strong>
-  <%= @item.title %>
-</p>
+<div class="container">
+	<table class="table">
+		<thead>
+			<tr>
+        <th>Title</th>
+		<th>Image</th>
+		<th>Price</th>
+		<th>Location</th>
+		<th>Category</th>
+		<th>User</th>
+		<th>Sold? : </th>
+		<th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+			<td><%= @item.title %></td>
+			<td><%= image_tag(@item.attachment, :size => "100x50") %></td>
+			<td><%= @item.price %></td>
+			<td><%= @item.location %></td>
+			<td><%= @item.category.name %></td>
+			<td><%= @item.user.username %></td>
+			<td><%= @item.sold %></td>
+			<% if admin? %>
+			<td><%= link_to 'Edit', edit_item_path(@item) %></td>
+			<% end %>
+      </tr>
+    </tbody>
+	<%= link_to 'Back', categories_path %>
+  </table>
+</div>
 
-<p>
-  <strong>Image:</strong>
-  <%= @item.image %>
-</p>
+</body>
+</html>
 
-<p>
-  <strong>Price:</strong>
-  <%= @item.price %>
-</p>
-
-<p>
-  <strong>Location:</strong>
-  <%= @item.location %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @item.category.name %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @item.user.username %>
-</p>
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', categories_path %>

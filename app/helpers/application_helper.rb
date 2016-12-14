@@ -8,10 +8,23 @@ module ApplicationHelper
 			#Ruby returns the last object in the method
 		end
 	end
+	
+	def admin?
+		if session[:user_id].nil?
+			return
+		else
+		signed_in? == true
+		@current_user == User.find_by_id(4)
+		end
+	end
+	#log in to the admin account with the email dionhosite@gmail.com and the password admin
+
 		
 	def euro(amount)
 	number_to_currency(amount, :unit => '€')
 	end
+	
+	
 	
 	
 end

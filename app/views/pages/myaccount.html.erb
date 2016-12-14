@@ -37,9 +37,14 @@
       </tr>
     </tbody>
   </table>
+
   
-			<li><%=link_to "View my items", pages_myitems_path%></li>
+			<li><%=link_to "View my active items", pages_myitems_path%></li>
+			<li><%=link_to "View my sold items", pages_solditems_path%></li>
+			<li><%=link_to "View my purchases", pages_mypurchases_path%></li>
             <li><%=link_to "Edit Account", edit_user_path(@current_user)%></li>
+			  <strong>Map:</strong>
+  <%= image_tag "http://maps.google.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@current_user.latitude}%2C#{@current_user.longitude}" %>
 	<% end %>
 </div>
 
